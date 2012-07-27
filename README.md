@@ -1,4 +1,4 @@
-yt-JsExtensions
+ytJsExtensions
 ===============
 
 Biblioteca de extensão JavaScript
