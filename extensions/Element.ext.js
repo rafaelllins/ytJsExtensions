@@ -17,7 +17,7 @@ searchElements: -> Grupo de elementos a serem pesquisados.
 		className,
 		tagName,
 		value,
-		...
+		atributo_customizado...
 	}
 }, ...] -> mais de uma expressão de busca pode ser passada ao método e todas serão verificadas em conjunto
 ,settings: -> Configurações gerais. Opcional.
@@ -26,7 +26,7 @@ searchElements: -> Grupo de elementos a serem pesquisados.
 	recursive -> busca recursiva
 }
 **********************************************************************************************/
-Element.prototype.getGroupsElementsByAttributes = function(searchElements, settings){
+var _getGroupsElementsByAttributes = function(searchElements, settings){
 	var allFoundElements = [];
 	var ifExpression;
 	var checkAndAdd;
@@ -106,13 +106,16 @@ Element.prototype.getGroupsElementsByAttributes = function(searchElements, setti
 	}
 	return allFoundElements;
 }
+Element.prototype.getGroupsElementsByAttributes = _getGroupsElementsByAttributes;
+Document.prototype.getGroupsElementsByAttributes = _getGroupsElementsByAttributes;
+
 /*********************************************************************************************
 attributes:{ -> Qualquer atributo e em quantos quiser. Obrigatório ao menos um atributo
 	id,
 	className,
 	tagName,
 	value,
-	...
+	atributo_customizado...
 },
 settings:{ -> Configurações. Opcional.
 	single -> Retorna na primeira ocorrência. Opcional.
@@ -120,7 +123,7 @@ settings:{ -> Configurações. Opcional.
 	recursive -> Busca recursiva. Opcional.
 }
 **********************************************************************************************/
-Element.prototype.getElementsByAttributes = function(attributes, settings){
+var _getElementsByAttributes = function(attributes, settings){
 	var allFoundElements = [];
 	var checkAndAdd;
 	var ifExpression = "";
@@ -186,3 +189,5 @@ Element.prototype.getElementsByAttributes = function(attributes, settings){
 	}
 	return allFoundElements;
 }
+Element.prototype.getElementsByAttributes = _getElementsByAttributes;
+Document.prototype.getElementsByAttributes = _getElementsByAttributes;
