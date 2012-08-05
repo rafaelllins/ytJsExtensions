@@ -1,5 +1,5 @@
 /****************************************
-  ytJsExtensions by Yuup Tech
+  ytJsExtensions by Yuup Tech v0.3b
   -------------------------------------
 autor: Rafaell Lins
 e-mail: rafaellmail@gmail.com
