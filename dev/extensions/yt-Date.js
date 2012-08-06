@@ -4,7 +4,7 @@
 autor: Rafaell Lins
 e-mail: rafaellmail@gmail.com
 criado: 01/10/2011
-�ltima modifica��o: 24/11/2011
+Última modificação: 24/11/2011
 *****************************************/
 
 Date.prototype.inInterval = function(date, seconds){
