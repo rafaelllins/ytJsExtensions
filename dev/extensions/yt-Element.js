@@ -7,6 +7,12 @@ criado: 01/10/2011
 última modificação: 27/07/2012
 *****************************************/
 
+/*************************************************************************************************************************************************
+TASK:
+[ ]  -  Realizar um comporativo de desempenho entre as implementações das duas funções (getGroupsElementsByAttributes e getElementsByAttributes) com uma equivalência em jQuery.
+[ ]  -  Melhorar o código de exemplo.
+**************************************************************************************************************************************************/
+
 /*********************************************************************************************
 searchElements: -> Grupo de elementos a serem pesquisados.
 [{	
