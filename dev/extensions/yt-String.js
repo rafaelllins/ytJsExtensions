@@ -4,8 +4,20 @@
 autor: Rafaell Lins
 e-mail: rafaellmail@gmail.com
 criado: 01/10/2011
-última modificação: 27/11/2011
+Ãšltima modificaÃ§Ã£o: 11/08/2012
 *****************************************/
+
+String.prototype.ltrim = function(){
+    return this.replace(/^\s+/g,"");
+}
+
+String.prototype.rtrim = function(){
+    return this.replace(/\s+$/g,"");
+}
+
+String.prototype.trim = function(){
+    return this.replace(/^\s+|\s+$/g,"");
+}
 
 String.prototype.endWith = function(str){
 	var result;
