@@ -4,7 +4,7 @@
 autor: Rafaell Lins
 e-mail: rafaellmail@gmail.com
 criado: 01/10/2011
-Última modificação: 24/11/2011
+Última modificação: 10/10/2012
 *****************************************/
 
 Date.prototype.inInterval = function(date, seconds){
@@ -29,4 +29,50 @@ Date.prototype.toDDMMYYYYString = function () {
         this.getMonth() > 8 ? this.getMonth() + 1 : '0' + (this.getMonth() + 1),
         this.getFullYear()
     ].join('/') 
+}
+
+Date.prototype.stringFormat = function (format) {
+	var ER_separator = /[\/ ,:-]/;
+	var ER_field = /d{1,2}|M{1,2}|yy|[y]{4}|h{1,2}|m{1,2}|s{1,2}/;
+	
+	var arrFields = format.split(ER_separator);
+	var arrSeparators = format.split(ER_field).filter(function (obj){return obj != "";});
+	
+	var dataString = "";
+	
+	for(var x = 0; x < arrFields.length; x++){
+		var typeField = arrFields[x].charAt(0);
+		var nameField = arrFields[x];
+		var sizeNameField = nameField.length;
+		var valueField;
+		
+		switch(typeField){
+			case "y":
+				valueField = (sizeNameField == 2) ? this.getFullYear().toString().substr(2,2) : this.getFullYear();
+				break;
+			case "M":
+				valueField = this.getMonth() + 1;
+				break;
+			case "d":
+				valueField = this.getDate();
+				break;
+			case "h":
+				valueField = this.getHours();
+				break;
+			case "m":
+				valueField = this.getMinutes();
+				break;
+			case "s":
+				valueField = this.getSeconds();
+				break;
+		}
+		
+		if(sizeNameField == 2 && typeField != "y" && valueField < 10)
+			valueField = '0' + valueField;
+		
+		var separator = (x < arrFields.length - 1) ? arrSeparators[x] : "";
+		dataString += valueField + separator;
+	}
+	
+	return dataString;
 }
