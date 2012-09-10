@@ -23,14 +23,6 @@ Date.prototype.subtractDays = function (days) {
     return new Date(this - (86400000 * days));
 }
 
-Date.prototype.toDDMMYYYYString = function () {
-    return isNaN(this) ? 'NaN' : [
-        this.getDate() > 9 ? this.getDate() : '0' + this.getDate(),
-        this.getMonth() > 8 ? this.getMonth() + 1 : '0' + (this.getMonth() + 1),
-        this.getFullYear()
-    ].join('/') 
-}
-
 Date.prototype.stringFormat = function (format) {
 	var ER_separator = /[\/ ,:-]/;
 	var ER_field = /d{1,2}|M{1,2}|yy|[y]{4}|h{1,2}|m{1,2}|s{1,2}/;
