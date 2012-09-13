@@ -23,24 +23,32 @@ Date.prototype.subtractDays = function (days) {
     return new Date(this - (86400000 * days));
 }
 
+/*
+versão beta*
+Possui alguns erros:
+No IE, ao mesclar entre operadores e a sua ausência, como no ex: 
+(Date.stringFormat("yyyyMM-ddhhmm:ss")) -> O retorno não é como o esperado. 
+Em moteres do mozilla, foram testados e funcionam normalmente.
+*/
 Date.prototype.stringFormat = function (format) {
-	var ER_separator = /[\/ ,:-]/;
-	var ER_field = /d{1,2}|M{1,2}|yy|[y]{4}|h{1,2}|m{1,2}|s{1,2}/;
+	var ER_field = /d{1,2}|M{1,2}|[y]{2,4}|h{1,2}|m{1,2}|s{1,2}/g;
 	
-	var arrFields = format.split(ER_separator);
-	var arrSeparators = format.split(ER_field).filter(function (obj){return obj != "";});
+	var arrFields = format.match(ER_field);
+	var arrSeparators = format.split(ER_field)/*.filter(function (obj){return obj != undefined;})*/;
+	
+	var skipSeparator = (arrSeparators.length > (arrFields.length - 1)) ? 1 : 0;
 	
 	var dataString = "";
-	
+
 	for(var x = 0; x < arrFields.length; x++){
 		var typeField = arrFields[x].charAt(0);
 		var nameField = arrFields[x];
 		var sizeNameField = nameField.length;
 		var valueField;
-		
+
 		switch(typeField){
 			case "y":
-				valueField = (sizeNameField == 2) ? this.getFullYear().toString().substr(2,2) : this.getFullYear();
+				valueField = this.getFullYear().toString().substr(4-sizeNameField,sizeNameField);
 				break;
 			case "M":
 				valueField = this.getMonth() + 1;
@@ -58,13 +66,13 @@ Date.prototype.stringFormat = function (format) {
 				valueField = this.getSeconds();
 				break;
 		}
-		
+
 		if(sizeNameField == 2 && typeField != "y" && valueField < 10)
 			valueField = '0' + valueField;
-		
-		var separator = (x < arrFields.length - 1) ? arrSeparators[x] : "";
+
+		var separator = (x < arrFields.length - 1 && arrSeparators[x + skipSeparator] != undefined) ? arrSeparators[x + skipSeparator] : "";
 		dataString += valueField + separator;
 	}
-	
+
 	return dataString;
 }
