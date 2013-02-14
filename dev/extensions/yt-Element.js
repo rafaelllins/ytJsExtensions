@@ -4,31 +4,31 @@
 autor: Rafaell Lins
 e-mail: rafaellmail@gmail.com
 criado: 01/10/2011
-última modificação: 27/07/2012
+ï¿½ltima modificaï¿½ï¿½o: 27/07/2012
 *****************************************/
 
 /*************************************************************************************************************************************************
 TASK:
-[ ]  -  Realizar um comporativo de desempenho entre as implementações das duas funções (getGroupsElementsByAttributes e getElementsByAttributes) com uma equivalência em jQuery.
-[ ]  -  Melhorar o código de exemplo.
+[ ]  -  Realizar um comporativo de desempenho entre as implementaï¿½ï¿½es das duas funï¿½ï¿½es (getGroupsElementsByAttributes e getElementsByAttributes) com uma equivalï¿½ncia em jQuery.
+[ ]  -  Melhorar o cï¿½digo de exemplo.
 **************************************************************************************************************************************************/
 
 /*********************************************************************************************
 searchElements: -> Grupo de elementos a serem pesquisados.
 [{	
-	groupName -> obrigatório, nome do atributo (grupo) que conterá o objeto, caso encontrado. Se a opção single estiver falsa, será retornado um array.
-	single -> opcional, retorna na primeira ocorrência, default é falso
-	att:{ -> Qualquer atributo e em quantos quiser. Obrigatório ao menos um atributo.
+	groupName -> obrigatï¿½rio, nome do atributo (grupo) que conterï¿½ o objeto, caso encontrado. Se a opï¿½ï¿½o single estiver falsa, serï¿½ retornado um array.
+	single -> opcional, retorna na primeira ocorrï¿½ncia, default ï¿½ falso
+	att:{ -> Qualquer atributo e em quantos quiser. Obrigatï¿½rio ao menos um atributo.
 		id,
 		className,
 		tagName,
 		value,
 		atributo_customizado...
 	}
-}, ...] -> mais de uma expressão de busca pode ser passada ao método e todas serão verificadas em conjunto
-,settings: -> Configurações gerais. Opcional.
+}, ...] -> mais de uma expressï¿½o de busca pode ser passada ao mï¿½todo e todas serï¿½o verificadas em conjunto
+,settings: -> Configuraï¿½ï¿½es gerais. Opcional.
 {
-	ignoreCase -> opcional, comparação case insensitive
+	ignoreCase -> opcional, comparaï¿½ï¿½o case insensitive
 	recursive -> busca recursiva
 }
 **********************************************************************************************/
@@ -75,7 +75,7 @@ var _getGroupsElementsByAttributes = function(searchElements, settings){
 							upper = "";
 					}
 				}
-				//Verifica se possui uma expressão de busca
+				//Verifica se possui uma expressï¿½o de busca
 				if(arrExpression.length > 0){
 					eval("allFoundElements." + _groupName + " = " + (_single ? "null" : "[]") + ";");
 					var elementNotFound = _single ? "allFoundElements." + _groupName + " == null && " : "";
@@ -91,7 +91,7 @@ var _getGroupsElementsByAttributes = function(searchElements, settings){
 				ifExpression += ") " + arrBlockIfExpression[k - 1] + " if(" + arrElementsExpression[k];
 			ifExpression += ")" + arrBlockIfExpression[arrBlockIfExpression.length - 1];
 			
-			//Compila a rotina de verificação e adição de novos elementos
+			//Compila a rotina de verificaï¿½ï¿½o e adiï¿½ï¿½o de novos elementos
 			eval("checkAndAdd = function(child, index){" + ifExpression + "}");
 			
 			var checkAndAddRecursive = function(currentChild){
@@ -116,16 +116,16 @@ Element.prototype.getGroupsElementsByAttributes = _getGroupsElementsByAttributes
 Document.prototype.getGroupsElementsByAttributes = _getGroupsElementsByAttributes;
 
 /*********************************************************************************************
-attributes:{ -> Qualquer atributo e em quantos quiser. Obrigatório ao menos um atributo
+attributes:{ -> Qualquer atributo e em quantos quiser. Obrigatï¿½rio ao menos um atributo
 	id,
 	className,
 	tagName,
 	value,
 	atributo_customizado...
 },
-settings:{ -> Configurações. Opcional.
-	single -> Retorna na primeira ocorrência. Opcional.
-	ignoreCase -> Comparação case insensitive. Opcional.
+settings:{ -> Configuraï¿½ï¿½es. Opcional.
+	single -> Retorna na primeira ocorrï¿½ncia. Opcional.
+	ignoreCase -> Comparaï¿½ï¿½o case insensitive. Opcional.
 	recursive -> Busca recursiva. Opcional.
 }
 **********************************************************************************************/
@@ -164,14 +164,14 @@ var _getElementsByAttributes = function(attributes, settings){
 			}
 		}
 		
-		//Verifica se possui uma expressão de busca
+		//Verifica se possui uma expressï¿½o de busca
 		if(arrExpression.length > 0){
 			eval("allFoundElements = " + (_single ? "null" : "[]") + ";");
 			
 			blockIfExpression = "{allFoundElements" + (_single ? " = foundElement(child, index)" : ".push(foundElement(child, index))") + ";}";
 			ifExpression = "if(" + arrExpression.join(" && ") + ")" + blockIfExpression;
 			
-			//Compila a rotina de verificação e adição de novos elementos
+			//Compila a rotina de verificaï¿½ï¿½o e adiï¿½ï¿½o de novos elementos
 			eval("checkAndAdd = function(child, index){" + ifExpression + "}");
 			
 			var checkAndAddRecursive = function(currentChild){
@@ -197,3 +197,11 @@ var _getElementsByAttributes = function(attributes, settings){
 }
 Element.prototype.getElementsByAttributes = _getElementsByAttributes;
 Document.prototype.getElementsByAttributes = _getElementsByAttributes;
+
+Element.prototype.addCSSClass = function(name){
+	if(this.className !== undefined && typeof this.className === "string" && this.className.trim().length === 0){
+		this.className = name;
+	}else{
+		this.className += " " + name;
+	}
+}
